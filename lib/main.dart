@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'src/core/config/supabase_config.dart';
 import 'src/core/routing/router.dart';
 import 'src/core/theme/theme.dart';
 
@@ -9,12 +10,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
-  // Safe Firebase Initialization
+  // Supabase Initialization
   try {
-    await Firebase.initializeApp();
+    await Supabase.initialize(
+      url: SupabaseConfig.url,
+      anonKey: SupabaseConfig.anonKey,
+    );
   } catch (e) {
-    debugPrint("Firebase initialization skipped/failed: $e");
-    debugPrint("GovConnect is running in Local Mock mode.");
+    debugPrint("Supabase initialization failed: $e");
   }
 
   runApp(

@@ -30,7 +30,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   Future<void> _saveAndContinue() async {
     await context.setLocale(Locale(_selectedLanguageCode));
     if (mounted) {
-      context.go('/login');
+      context.go('/home');
     }
   }
 
