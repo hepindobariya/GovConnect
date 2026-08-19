@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/theme/theme.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -42,8 +43,13 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   Future<void> _navigateToNext() async {
     await Future.delayed(const Duration(milliseconds: 2000));
     if (mounted) {
-      // Navigate to language selection page for first setup
-      context.go('/language');
+      final prefs = await SharedPreferences.getInstance();
+      final hasProfile = prefs.containsKey('user_profile');
+      if (hasProfile) {
+        context.go('/home');
+      } else {
+        context.go('/language');
+      }
     }
   }
 
@@ -63,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             end: Alignment.bottomCenter,
             colors: [
               AppTheme.ashokaBlue,
-              Color(0xFF073C68), // Deeper blue
+              Color(0xFF073C68),
             ],
           ),
         ),
@@ -81,7 +87,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.2),
+                        color: Colors.black.withOpacity(0.2),
                         blurRadius: 20,
                         offset: const Offset(0, 10),
                       ),
@@ -89,7 +95,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   ),
                   child: const Center(
                     child: Icon(
-                      Icons.account_balance_outlined, // Emblem representation
+                      Icons.account_balance_outlined,
                       size: 60,
                       color: AppTheme.ashokaBlue,
                     ),
@@ -115,7 +121,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                       'splash_loading'.tr(),
                       style: GoogleFonts.inter(
                         fontSize: 14,
-                        color: Colors.white.withValues(alpha: 0.8),
+                        color: Colors.white.withOpacity(0.8),
                         fontWeight: FontWeight.w400,
                       ),
                     ),
