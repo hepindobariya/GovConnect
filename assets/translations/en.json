@@ -1,0 +1,12 @@
+{
+  "app_name": "GovConnect",
+  "continue_text": "Continue",
+  "next": "Next",
+  "back": "Back",
+  "home_title": "GovConnect Home",
+  "splash_loading": "Loading your personalized feed...",
+  "select_language": "Select Language / भाषा चुनें",
+  "login_title": "Login to GovConnect",
+  "continue_as_guest": "Continue as Guest",
+  "gujarat_only": "Currently showing schemes for Gujarat state and central schemes applicable to Gujarat."
+}
